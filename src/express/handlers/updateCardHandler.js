@@ -1,4 +1,4 @@
-import { updateCard } from "../../mongoose/cardOperations.js";
+import { updateCard, findCardById } from "../../mongoose/cardOperations.js";
 
 async function updateCardHandler(req, res) {
   const { biz } = req;
@@ -6,7 +6,11 @@ async function updateCardHandler(req, res) {
 
   if (!biz) return res.status(400).json("user is not business");
 
-  const updatedCard = await updateCard(id, filter, option);
+  const updateSuccess = await updateCard(id, filter, option);
+  console.log(updateSuccess);
+  if (!updateSuccess) return res.status(500).json("card not valid");
+
+  const updatedCard = await findCardById(id);
   console.log(updatedCard);
   if (!updatedCard) return res.status(500).json("card not found");
 

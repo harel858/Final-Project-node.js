@@ -13,6 +13,8 @@ import addCard from "./handlers/addCardHandler.js";
 import registarBizHandler from "./handlers/businessRegistar.js";
 import getCardsHandler from "./handlers/getCardsHandler.js";
 import updateCardHandler from "./handlers/updateCardHandler.js";
+import deleteCardHandler from "./handlers/deleteHandler.js";
+
 function runServer() {
   app.get("/", getAllUsersHandler);
   app.get("/getMyDetails", authatication, getDetailsHandler);
@@ -22,6 +24,7 @@ function runServer() {
   app.post("/cards/create", authatication, addCard);
   app.get("/cards", authatication, getCardsHandler);
   app.put("/cards/update", authatication, updateCardHandler);
+  app.delete("/cards/delete", authatication, deleteCardHandler);
 
   app.listen(3000, () => console.log("server is listening"));
 }
