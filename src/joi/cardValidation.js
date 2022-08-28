@@ -1,11 +1,11 @@
-import { object, string } from "joi";
+import joi from "joi";
 
-const joiValidation = object({
-  businessName: string().required().max(20),
-  description: string().required().max(200),
-  address: string().required(),
-  phone: string().required().max(14).min(7),
-  image: string().required(),
+const joiValidation = joi.object({
+  businessName: joi.string().required().max(20),
+  description: joi.string().required().max(200),
+  address: joi.string().required(),
+  phone: joi.string().required().max(14).min(7),
+  image: joi.string().required(),
 });
 
 function cardValidation(userDetails) {

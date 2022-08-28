@@ -1,4 +1,4 @@
-import operations from "../../mongoose/userOperations";
+import operations from "../../mongoose/userOperations.js";
 
 async function getAllUsers(req, res) {
   try {

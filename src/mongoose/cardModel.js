@@ -1,14 +1,14 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-const cardSchema = Schema({
+const cardSchema = new mongoose.Schema({
   businessName: String,
   description: String,
   address: String,
   phone: String,
   image: String,
-  userId: String,
+  userId: { type: mongoose.Types.ObjectId, ref: "user" },
 });
 
-const cardModel = model("card", cardSchema);
+const cardModel = mongoose.model("card", cardSchema);
 
 export default cardModel;

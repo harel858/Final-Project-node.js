@@ -1,12 +1,24 @@
-import cardModel from "./cardModel";
+import cardModel from "./cardModel.js";
 
 async function addCard(cardDetails) {
+  const newCard = new cardModel(cardDetails);
+  await newCard.save();
+  return newCard;
+}
+
+async function findCardById(id) {
+  return await cardModel.find({ userId: id });
+}
+
+async function updateCard(id, filter, option) {
   try {
-    const newCard = await new cardModel(cardDetails).save();
-    return newCard;
+    return await cardModel.updateOne(
+      { _id: id },
+      { $set: { [filter]: option } }
+    );
   } catch {
     return null;
   }
 }
 
-export default { addCard };
+export { addCard, findCardById, updateCard };

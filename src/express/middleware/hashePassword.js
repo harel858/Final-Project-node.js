@@ -1,4 +1,4 @@
-import hashedPassword from "../../bcrypt/bcrypt";
+import hashedPassword from "../../bcrypt/bcrypt.js";
 
 async function middlewareHash(req, res, next) {
   const password = await hashedPassword(req.body.password);

@@ -1,11 +1,11 @@
-import { verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 async function authUser(req, res, next) {
   const { token } = req.headers;
   if (!token) return res.status(401).json("token must be provided");
 
   try {
-    const data = verify(token, "finalProject");
+    const data = jwt.verify(token, "finalProject");
     req.userId = data.userId;
     req.biz = data.isBiz;
     next();

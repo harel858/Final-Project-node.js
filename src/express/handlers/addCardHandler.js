@@ -1,16 +1,30 @@
-import cardValidation from "../../joi/cardValidation";
-import operations from "../../mongoose/cardOperations";
+import cardValidation from "../../joi/cardValidation.js";
+import { addCard } from "../../mongoose/cardOperations.js";
 
 async function addCardHandler(req, res) {
-  if (req.biz == true) {
+  try {
+    const { businessName, description, address, phone, image } = req.body;
+    const { userId } = req;
+
+    if (!req.biz) return res.status(400).json("user is not business");
+
     const { error } = cardValidation(req.body);
     if (error) return res.status(400).json(error.details[0].message);
-    req.body.userId = req.userId;
-    const newCard = await operations.addCard(req.body);
-    if (newCard == null) return res.status(500).json(newCard);
-    return res.json(newCard);
+
+    const newCard = await addCard({
+      businessName,
+      description,
+      address,
+      phone,
+      image,
+      userId,
+    });
+
+    return res.status(201).json(newCard);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json("somthing went wrong");
   }
-  return res.status(400).json("user is not business");
 }
 
 export default addCardHandler;

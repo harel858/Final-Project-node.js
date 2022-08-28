@@ -3,22 +3,25 @@ import express from "express";
 const app = express();
 app.use(json());
 
-import registarHandler from "./handlers/registarHandler";
-import getAllUsersHandler from "./handlers/getHandler";
-import hashPassword from "./middleware/hashePassword";
-import signinUser from "./handlers/loginHandler";
-import authatication from "./middleware/auth";
-import getDetailsHandler from "./handlers/getUserDetails";
-import addCard from "./handlers/addCardHandler";
+import registarHandler from "./handlers/registarHandler.js";
+import getAllUsersHandler from "./handlers/getHandler.js";
+import hashPassword from "./middleware/hashePassword.js";
+import signinUser from "./handlers/loginHandler.js";
+import authatication from "./middleware/auth.js";
+import getDetailsHandler from "./handlers/getUserDetails.js";
+import addCard from "./handlers/addCardHandler.js";
 import registarBizHandler from "./handlers/businessRegistar.js";
-
+import getCardsHandler from "./handlers/getCardsHandler.js";
+import updateCardHandler from "./handlers/updateCardHandler.js";
 function runServer() {
   app.get("/", getAllUsersHandler);
   app.get("/getMyDetails", authatication, getDetailsHandler);
   app.post("/registar", hashPassword, registarHandler);
   app.post("/registar/business", hashPassword, registarBizHandler);
   app.post("/login", signinUser);
-  app.post("/createCard", authatication, addCard);
+  app.post("/cards/create", authatication, addCard);
+  app.get("/cards", authatication, getCardsHandler);
+  app.put("/cards/update", authatication, updateCardHandler);
 
   app.listen(3000, () => console.log("server is listening"));
 }

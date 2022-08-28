@@ -1,10 +1,10 @@
-import { object, string, boolean } from "joi";
+import joi from "joi";
 
-const joiValidation = object({
-  name: string().max(9).min(2).required(),
-  email: string().email().required(),
-  password: string().required(),
-  biz: boolean(),
+const joiValidation = joi.object({
+  name: joi.string().max(20).min(2).required(),
+  email: joi.string().email().required(),
+  password: joi.required(),
+  biz: joi.boolean(),
 });
 
 function validateRegistarUser(userDetails) {

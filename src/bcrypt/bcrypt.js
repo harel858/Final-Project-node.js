@@ -1,8 +1,8 @@
-import { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 
 async function hashedPassword(password) {
   try {
-    return await hash(password, 10);
+    return await bcrypt.hash(password, 10);
   } catch {
     null;
   }

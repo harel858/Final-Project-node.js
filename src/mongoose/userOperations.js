@@ -1,4 +1,4 @@
-import userModel from "./userModel";
+import userModel from "./userModel.js";
 
 async function addUserToDB(userDetails) {
   try {
