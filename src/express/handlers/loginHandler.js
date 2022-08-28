@@ -3,7 +3,7 @@ import operations from "../../mongoose/userOperations.js";
 import bcrypt from "bcrypt";
 
 async function signinUser(req, res) {
-  const { email, password } = req.headers;
+  const { email, password } = req.body;
   if (!email || !password)
     return res.status(400).json("email and password must be provided");
 

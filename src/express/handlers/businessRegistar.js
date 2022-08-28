@@ -4,6 +4,7 @@ import operations from "../../mongoose/userOperations.js";
 async function registarUser(req, res) {
   const { name, email, password } = req.body;
   const { error } = joiValidation(req.body);
+
   if (error) return res.status(400).json(error.details[0].message);
 
   const newUser = await operations.addUserToDB({
